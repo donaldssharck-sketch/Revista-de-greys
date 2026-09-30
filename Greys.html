@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATLAS GEOGRÁFICO DE EUROPA - MODERN EDITION</title>
+    <!-- Fuentes limpias y modernas -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #0b0f19; 
+            color: #f1f5f9; 
+        }
+        .modern-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .modern-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(56, 189, 248, 0.2);
+        }
+        .drag-item {
+            cursor: grab;
+            transition: transform 0.15s ease, background-color 0.15s ease;
+        }
+        .drag-item:active {
+            cursor: grabbing;
+        }
+        .drop-zone {
+            transition: all 0.3s ease;
+        }
+        .drop-zone.drag-over {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between p-4 md:p-8">
+
+    <!-- CONTENEDOR PRINCIPAL MODERNIZADO -->
+    <div class="w-full max-w-6xl mx-auto my-auto">
+        
+        <!-- ENCABEZADO -->
+        <header class="text-center mb-10">
+            <span class="inline-block text-xs uppercase tracking-widest text-sky-400 font-bold bg-sky-950/80 px-4 py-1.5 rounded-full border border-sky-800/50 mb-3 shadow-sm">Compendio Didáctico de Europa</span>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight">ATLAS ESCOLAR INTERACTIVO</h1>
+            <p class="text-slate-400 text-sm md:text-base mt-2">Geografía, Diversidad, Sostenibilidad y Ciudadanía Económica.</p>
+        </header>
+
+        <!-- GRID DE LOS 4 CUADROS (DISEÑO MODERNIZADO) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- CUADRO 1 -->
+            <div onclick="abrirSeccion(1)" class="modern-card cursor-pointer p-6 rounded-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl group-hover:bg-sky-500/20 transition-all"></div>
+                <span class="text-xs font-bold text-sky-400 uppercase tracking-wider bg-sky-900/40 px-2.5 py-1 rounded-md border border-sky-800/40">Cuadro I</span>
+                <h3 class="text-xl font-bold text-white mt-3 group-hover:text-sky-300 transition-colors">Descubrimos Europa</h3>
+                <p class="text-slate-300 text-sm mt-1">Conocemos el medio físico del viejo continente.</p>
+                <div class="mt-6 flex items-center text-sky-400 text-xs font-bold uppercase tracking-wider group-hover:translate-x-1.5 transition-transform">
+                    <span>Abrir mapa interactivo</span> &rarr;
+                </div>
+            </div>
+
+            <!-- CUADRO 2 -->
+            <div onclick="abrirSeccion(2)" class="modern-card cursor-pointer p-6 rounded-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all"></div>
+                <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider bg-indigo-900/40 px-2.5 py-1 rounded-md border border-indigo-800/40">Cuadro II</span>
+                <h3 class="text-xl font-bold text-white mt-3 group-hover:text-indigo-300 transition-colors">De Europa Muchos Paisajes</h3>
+                <p class="text-slate-300 text-sm mt-1">Regiones geográficas y diversidad climática.</p>
+                <div class="mt-6 flex items-center text-indigo-400 text-xs font-bold uppercase tracking-wider group-hover:translate-x-1.5 transition-transform">
+                    <span>Ver pasaporte de regiones</span> &rarr;
+                </div>
+            </div>
+
+            <!-- CUADRO 3 -->
+            <div onclick="abrirSeccion(3)" class="modern-card cursor-pointer p-6 rounded-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider bg-emerald-900/40 px-2.5 py-1 rounded-md border border-emerald-800/40">Cuadro III</span>
+                <h3 class="text-xl font-bold text-white mt-3 group-hover:text-emerald-300 transition-colors">Europa, Piensa en Verde</h3>
+                <p class="text-slate-300 text-sm mt-1">Importancia del desarrollo sostenible para el desarrollo económico.</p>
+                <div class="mt-6 flex items-center text-emerald-400 text-xs font-bold uppercase tracking-wider group-hover:translate-x-1.5 transition-transform">
+                    <span>Jugar: Europa tiene un problema</span> &rarr;
+                </div>
+            </div>
+
+            <!-- CUADRO 4 -->
+            <div onclick="abrirSeccion(4)" class="modern-card cursor-pointer p-6 rounded-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
+                <span class="text-xs font-bold text-amber-400 uppercase tracking-wider bg-amber-900/40 px-2.5 py-1 rounded-md border border-amber-800/40">Cuadro IV</span>
+                <h3 class="text-xl font-bold text-white mt-3 group-hover:text-amber-300 transition-colors">Yo Decido</h3>
+                <p class="text-slate-300 text-sm mt-1">Ciudadanía económica y enfoque de derechos.</p>
+                <div class="mt-6 flex items-center text-amber-400 text-xs font-bold uppercase tracking-wider group-hover:translate-x-1.5 transition-transform">
+                    <span>Iniciar simulador de decisiones</span> &rarr;
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- VENTANA MODAL MODERNA -->
+    <div id="modalSeccion" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-4xl rounded-2xl p-6 md:p-8 relative max-h-[92vh] overflow-y-auto shadow-2xl">
+            <button onclick="cerrarSeccion()" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 w-9 h-9 rounded-full flex items-center justify-center font-bold text-lg transition-colors">&times;</button>
+            <div id="contenidoModal">
+                <!-- Contenido dinámico -->
+            </div>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="mt-10 text-center text-xs text-slate-500">
+        Plataforma Educativa Interactiva &bull; Europa Geográfica y Social
+    </footer>
+
+    <!-- SCRIPT DE LÓGICA E INTERACTIVIDAD -->
+    <script>
+        let casoActualIndex = 0;
+        const casosEcologicos = [
+            {
+                titulo: "Caso 1: Empleo vs. Contaminación del Río",
+                descripcion: "Una importante fábrica textil genera cientos de empleos muy necesarios para la región, pero está vertiendo residuos químicos directamente en el río principal del valle.",
+                opcionA: "Cerrar la fábrica inmediatamente para proteger el ecosistema acuático.",
+                opcionB: "Obligar a la empresa a instalar una planta de tratamiento de aguas residuales subvencionada parcialmente.",
+                resultadoA: "Correcto en lo ambiental, pero genera una crisis económica y desempleo masivo en las familias locales.",
+                resultadoB: "¡Excelente decisión sostenible! Se equilibra la viabilidad económica de la empresa con la protección ambiental del río."
+            },
+            {
+                titulo: "Caso 2: Complejo Turístico vs. Bosque Nativo",
+                descripcion: "Un grupo inversor propone talar 50 hectáreas de un bosque nativo milenario para construir un complejo hotelero de lujo que atraerá turismo internacional.",
+                opcionA: "Autorizar la tala total del bosque para maximizar los ingresos turísticos inmediatos.",
+                opcionB: "Reubicar el proyecto en una zona ya urbanizada cercana y crear rutas ecológicas en el bosque sin talar árboles.",
+                resultadoA: "Pérdida irreversible de biodiversidad y degradación del suelo forestal. No es sostenible.",
+                resultadoB: "¡Muy bien! Se fomenta el turismo ecológico y el desarrollo económico sin destruir el patrimonio natural."
+            }
+        ];
+
+        function abrirSeccion(num) {
+            const modal = document.getElementById('modalSeccion');
+            const contenido = document.getElementById('contenidoModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            if (num === 1) {
+                contenido.innerHTML = `
+                    <h2 class="text-2xl font-bold text-white mb-1">Descubrimos Europa</h2>
+                    <p class="text-sky-400 text-sm font-semibold mb-4 border-b border-slate-800 pb-2">Conocemos el medio físico del viejo continente.</p>
+                    <p class="text-xs text-slate-400 mb-4">Instrucciones: Arrastre las piezas geográficas de la izquierda y colóquelas en sus sectores correspondientes del mapa físico interactivo.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- BANDEJA DE PIEZAS -->
+                        <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-bold text-slate-200 text-xs uppercase tracking-wider mb-3 pb-1 border-b border-slate-800">Piezas Geográficas:</h4>
+                            <div class="flex flex-col gap-2.5" id="piezasContainer">
+                                <div draggable="true" ondragstart="drag(event)" id="p1" class="drag-item bg-slate-800 hover:bg-slate-700 text-slate-200 p-2.5 rounded-lg text-xs font-medium border border-slate-700">🏔️ Cordillera de los Alpes (Montañas)</div>
+                                <div draggable="true" ondragstart="drag(event)" id="p2" class="drag-item bg-slate-800 hover:bg-slate-700 text-slate-200 p-2.5 rounded-lg text-xs font-medium border border-slate-700">🌊 Río Danubio y Volga (Ríos)</div>
+                                <div draggable="true" ondragstart="drag(event)" id="p3" class="drag-item bg-slate-800 hover:bg-slate-700 text-slate-200 p-2.5 rounded-lg text-xs font-medium border border-slate-700">🌊 Mar Mediterráneo y Atlántico</div>
+                                <div draggable="true" ondragstart="drag(event)" id="p4" class="drag-item bg-slate-800 hover:bg-slate-700 text-slate-200 p-2.5 rounded-lg text-xs font-medium border border-slate-700">🌾 Gran Llanura Europea (Llanuras)</div>
+                                <div draggable="true" ondragstart="drag(event)" id="p5" class="drag-item bg-slate-800 hover:bg-slate-700 text-slate-200 p-2.5 rounded-lg text-xs font-medium border border-slate-700">🏝️ Islandia y Córcega (Islas)</div>
+                                <div draggable="true" ondragstart="drag(event)" id="p6" class="drag-item bg-slate-800 hover:bg-slate-700 text-slate-200 p-2.5 rounded-lg text-xs font-medium border border-slate-700">🗺️ Península Ibérica / Escandinava</div>
+                                <div draggable="true" ondragstart="drag(event)" id="p7" class="drag-item bg-slate-800 hover:bg-slate-700 text-slate-200 p-2.5 rounded-lg text-xs font-medium border border-slate-700">🇪🇸 Países Clave (España, Francia)</div>
+                            </div>
+                        </div>
+
+                        <!-- MAPA INTERACTIVO MODERNO -->
+                        <div class="md:col-span-2 bg-slate-950/60 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
+                            <div class="text-center mb-3">
+                                <h4 class="text-white text-sm font-bold tracking-wide">MAPA FÍSICO INTERACTIVO DE EUROPA</h4>
+                                <span class="text-[11px] text-slate-400">Distribuye los elementos en las zonas del relieve</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3 my-2">
+                                <div class="drop-zone border-2 border-dashed border-slate-700 bg-slate-900/50 p-3 rounded-xl min-h-[100px] flex flex-col items-center justify-center text-center" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="removeDropStyle(event)" ondragenter="addDropStyle(event)">
+                                    <span class="text-[11px] font-bold text-sky-400 mb-1">📍 Norte / Islas y Penínsulas</span>
+                                    <div class="flex flex-wrap gap-1.5 justify-center w-full min-h-[45px] items-center"></div>
+                                </div>
+
+                                <div class="drop-zone border-2 border-dashed border-slate-700 bg-slate-900/50 p-3 rounded-xl min-h-[100px] flex flex-col items-center justify-center text-center" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="removeDropStyle(event)" ondragenter="addDropStyle(event)">
+                                    <span class="text-[11px] font-bold text-emerald-400 mb-1">🌾 Centro / Grandes Llanuras</span>
+                                    <div class="flex flex-wrap gap-1.5 justify-center w-full min-h-[45px] items-center"></div>
+                                </div>
+
+                                <div class="drop-zone border-2 border-dashed border-slate-700 bg-slate-900/50 p-3 rounded-xl min-h-[100px] flex flex-col items-center justify-center text-center" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="removeDropStyle(event)" ondragenter="addDropStyle(event)">
+                                    <span class="text-[11px] font-bold text-amber-400 mb-1">🏔️ Sur / Cordilleras y Países</span>
+                                    <div class="flex flex-wrap gap-1.5 justify-center w-full min-h-[45px] items-center"></div>
+                                </div>
+
+                                <div class="drop-zone border-2 border-dashed border-slate-700 bg-slate-900/50 p-3 rounded-xl min-h-[100px] flex flex-col items-center justify-center text-center" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="removeDropStyle(event)" ondragenter="addDropStyle(event)">
+                                    <span class="text-[11px] font-bold text-indigo-400 mb-1">🌊 Cuencas / Mares y Ríos</span>
+                                    <div class="flex flex-wrap gap-1.5 justify-center w-full min-h-[45px] items-center"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-800">
+                                <span class="text-xs text-slate-400 italic" id="estadoMapa">Listo para armar el mapa</span>
+                                <button onclick="reiniciarMapa()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 py-1.5 px-3 rounded-lg text-xs font-bold transition-colors">Reiniciar Piezas</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (num === 2) {
+                contenido.innerHTML = `
+                    <h2 class="text-2xl font-bold text-white mb-1">De Europa Muchos Paisajes</h2>
+                    <p class="text-indigo-400 text-sm font-semibold mb-4 border-b border-slate-800 pb-2">Regiones geográficas y diversidad climática.</p>
+                    
+                    <!-- PASAPORTE MODERNO -->
+                    <div class="bg-slate-950/60 border border-slate-800 p-6 rounded-2xl">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-5">
+                            <h3 class="text-lg text-white font-bold tracking-wide">PASAPORTE BIOCLIMÁTICO REGIONAL</h3>
+                            <span class="bg-indigo-950 text-indigo-300 border border-indigo-800 px-3 py-1 text-xs font-bold rounded-md">UNIÓN EUROPEA</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                            <div class="space-y-3 text-sm text-slate-300">
+                                <p><strong class="text-white">Región Geográfica:</strong> Europa Meridional</p>
+                                <p><strong class="text-white">País Ejemplo:</strong> España 🇪🇸</p>
+                                <p><strong class="text-white">Clima:</strong> Mediterráneo (veranos cálidos y secos, inviernos suaves).</p>
+                                <p><strong class="text-white">Paisaje Principal:</strong> Costas bañadas por el mar y montañas accidentadas (Sierra Nevada, Pirineos).</p>
+                                <p><strong class="text-white">Actividades Clave:</strong> Turismo internacional, agricultura mediterránea (olivo, vid, cítricos).</p>
+                            </div>
+                            
+                            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-center md:col-span-2">
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 inline-block w-full">
+                                    <img src="https://images.unsplash.com/photo-1543785734-4b6e564642f8?auto=format&fit=crop&w=700&q=80" alt="Paisaje de España" class="w-full h-48 object-cover rounded-md mb-3 shadow-md">
+                                    <p class="text-xs font-medium text-slate-300">Lo que caracteriza a la región: Olivos, costas soleadas y patrimonio histórico milenario.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (num === 3) {
+                cargarCasoEcologico();
+            } else if (num === 4) {
+                contenido.innerHTML = `
+                    <h2 class="text-2xl font-bold text-white mb-1">Yo Decido</h2>
+                    <p class="text-amber-400 text-sm font-semibold mb-4 border-b border-slate-800 pb-2">Ciudadanía económica y enfoque de derechos.</p>
+                    
+                    <div class="bg-slate-950/60 p-5 rounded-2xl border border-slate-800">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold bg-amber-950/80 text-amber-300 px-3 py-1.5 rounded-lg border border-amber-800/60">Presupuesto Disponible: <strong id="presupuestoRestante" class="text-white">100</strong> Monedas</span>
+                            <span class="text-xs text-slate-400">Enfoque de derechos ciudadanos</span>
+                        </div>
+                        
+                        <p class="text-xs text-slate-300 mb-4">Seleccione las mejoras comunitarias en las que desea invertir el presupuesto:</p>
+                        
+                        <div class="space-y-3 text-sm">
+                            <label class="flex items-center justify-between bg-slate-900/80 hover:bg-slate-900 p-3.5 rounded-xl border border-slate-800 cursor-pointer transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" value="35" onchange="actualizarPresupuesto(this)" class="w-4 h-4 accent-amber-500 rounded">
+                                    <span class="font-medium text-slate-200">🏫 Mejorar Escuela y Equipamiento Digital (Coste: 35)</span>
+                                </div>
+                                <span class="text-xs text-amber-400 font-bold bg-amber-950/50 px-2 py-1 rounded">Educación</span>
+                            </label>
+
+                            <label class="flex items-center justify-between bg-slate-900/80 hover:bg-slate-900 p-3.5 rounded-xl border border-slate-800 cursor-pointer transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" value="25" onchange="actualizarPresupuesto(this)" class="w-4 h-4 accent-amber-500 rounded">
+                                    <span class="font-medium text-slate-200">🌳 Crear Áreas Verdes y Parques (Coste: 25)</span>
+                                </div>
+                                <span class="text-xs text-amber-400 font-bold bg-amber-950/50 px-2 py-1 rounded">Ambiente</span>
+                            </label>
+
+                            <label class="flex items-center justify-between bg-slate-900/80 hover:bg-slate-900 p-3.5 rounded-xl border border-slate-800 cursor-pointer transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" value="40" onchange="actualizarPresupuesto(this)" class="w-4 h-4 accent-amber-500 rounded">
+                                    <span class="font-medium text-slate-200">🏭 Construir Fábrica de Empleo Local (Coste: 40)</span>
+                                </div>
+                                <span class="text-xs text-amber-400 font-bold bg-amber-950/50 px-2 py-1 rounded">Economía</span>
+                            </label>
+
+                            <label class="flex items-center justify-between bg-slate-900/80 hover:bg-slate-900 p-3.5 rounded-xl border border-slate-800 cursor-pointer transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" value="30" onchange="actualizarPresupuesto(this)" class="w-4 h-4 accent-amber-500 rounded">
+                                    <span class="font-medium text-slate-200">💧 Mejorar Saneamiento y Agua Potable (Coste: 30)</span>
+                                </div>
+                                <span class="text-xs text-amber-400 font-bold bg-amber-950/50 px-2 py-1 rounded">Salud</span>
+                            </label>
+
+                            <label class="flex items-center justify-between bg-slate-900/80 hover:bg-slate-900 p-3.5 rounded-xl border border-slate-800 cursor-pointer transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" value="20" onchange="actualizarPresupuesto(this)" class="w-4 h-4 accent-amber-500 rounded">
+                                    <span class="font-medium text-slate-200">🛣️ Construir Carretera de Conexión (Coste: 20)</span>
+                                </div>
+                                <span class="text-xs text-amber-400 font-bold bg-amber-950/50 px-2 py-1 rounded">Infraestructura</span>
+                            </label>
+                        </div>
+
+                        <div id="resultadoPresupuesto" class="mt-4 p-3 bg-slate-900 rounded-xl border border-slate-800 text-center font-medium text-slate-300 text-xs">
+                            Seleccione opciones para calcular la distribución de su comunidad.
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function cerrarSeccion() {
+            const modal = document.getElementById('modalSeccion');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        // FUNCIONES DE DRAG AND DROP
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function addDropStyle(ev) {
+            ev.currentTarget.classList.add('drag-over');
+        }
+
+        function removeDropStyle(ev) {
+            ev.currentTarget.classList.remove('drag-over');
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            let data = ev.dataTransfer.getData("text");
+            let element = document.getElementById(data);
+            let dropZone = ev.target.closest('.drop-zone');
+            
+            if (dropZone) {
+                dropZone.classList.remove('drag-over');
+                let targetContainer = dropZone.querySelector('div');
+                targetContainer.appendChild(element);
+                document.getElementById('estadoMapa').innerText = "¡Pieza ubicada correctamente!";
+            }
+        }
+
+        function reiniciarMapa() {
+            abrirSeccion(1);
+        }
+
+        // FUNCIONES PARA EL CUADRO 3
+        function cargarCasoEcologico() {
+            let caso = casosEcologicos[casoActualIndex];
+            const contenido = document.getElementById('contenidoModal');
+            contenido.innerHTML = `
+                <h2 class="text-2xl font-bold text-white mb-1">Europa, Piensa en Verde</h2>
+                <p class="text-emerald-400 text-sm font-semibold mb-4 border-b border-slate-800 pb-2">Importancia del desarrollo sostenible para el desarrollo económico.</p>
+                
+                <div class="bg-slate-950/60 p-5 rounded-2xl border border-slate-800">
+                    <span class="text-xs font-bold bg-emerald-950 text-emerald-300 px-3 py-1 rounded-md border border-emerald-800">Juego: Europa Tiene un Problema</span>
+                    
+                    <div class="mt-4 p-4 bg-slate-900 rounded-xl border border-slate-800">
+                        <h4 class="font-bold text-white text-base mb-2">${caso.titulo}</h4>
+                        <p class="text-xs text-slate-300 mb-4">${caso.descripcion}</p>
+                        
+                        <div class="space-y-2.5">
+                            <button onclick="evaluarCaso(0)" class="w-full text-left bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-xs transition-colors border border-slate-700 text-slate-200 font-medium">Opción A: ${caso.opcionA}</button>
+                            <button onclick="evaluarCaso(1)" class="w-full text-left bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-xs transition-colors border border-slate-700 text-slate-200 font-medium">Opción B: ${caso.opcionB}</button>
+                        </div>
+                        
+                        <p id="resultadoCaso" class="mt-4 font-medium text-xs text-slate-300"></p>
+                    </div>
+
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-xs text-slate-400">Caso ${casoActualIndex + 1} de ${casosEcologicos.length}</span>
+                        <button onclick="siguienteCaso()" class="bg-emerald-600 hover:bg-emerald-500 text-white py-1.5 px-4 rounded-xl text-xs font-bold transition-colors">Siguiente Caso &rarr;</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function evaluarCaso(opcion) {
+            let caso = casosEcologicos[casoActualIndex];
+            let res = document.getElementById('resultadoCaso');
+            if (opcion === 0) {
+                res.innerHTML = `<span class="text-rose-400 font-semibold">❌ ${caso.resultadoA}</span>`;
+            } else {
+                res.innerHTML = `<span class="text-emerald-400 font-semibold">✅ ${caso.resultadoB}</span>`;
+            }
+        }
+
+        function siguienteCaso() {
+            casoActualIndex = (casoActualIndex + 1) % casosEcologicos.length;
+            cargarCasoEcologico();
+        }
+
+        // FUNCIONES PARA EL CUADRO 4
+        function actualizarPresupuesto(checkbox) {
+            let checkboxes = document.querySelectorAll('#contenidoModal input[type="checkbox"]');
+            let gastado = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) gastado += parseInt(cb.value);
+            });
+
+            let restante = 100 - gastado;
+            document.getElementById('presupuestoRestante').innerText = restante;
+
+            let resDiv = document.getElementById('resultadoPresupuesto');
+            if (restante < 0) {
+                resDiv.innerHTML = `<span class="text-rose-400 font-semibold">⚠️ ¡Presupuesto rebasado! Ha gastado ${Math.abs(restante)} monedas de más. Desmarque alguna opción.</span>`;
+            } else if (restante === 0) {
+                resDiv.innerHTML = `<span class="text-emerald-400 font-semibold">🎯 ¡Presupuesto asignado al 100% con enfoque de derechos y desarrollo económico equilibrado!</span>`;
+            } else {
+                resDiv.innerHTML = `Presupuesto restante por asignar: ${restante} monedas.`;
+            }
+        }
+    </script>
+</body>
+</html>
